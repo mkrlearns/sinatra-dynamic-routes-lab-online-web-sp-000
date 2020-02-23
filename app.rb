@@ -10,11 +10,8 @@ class App < Sinatra::Base
   end
 
   get '/:op/:num1/:num2' do
-    op = '+'
-    op = '-' if params[:op] == 'subtract'
-    op = '/' if params[:op] == 'divide'
-    op = '*' if params[:op] == 'multiply'
-    "#{params[:num1].to_i.send(op,params[:num2].to_i)}"
+    op = {'add'=>'+', 'subtract'=>'-', 'divide'=>'/', 'multiply'=>'*'}
+    "#{params[:num1].to_i.send(op[params[:op]],params[:num2].to_i)}"
   end
 
 end
